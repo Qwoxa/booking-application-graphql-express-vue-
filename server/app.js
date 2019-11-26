@@ -1,40 +1,32 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const graphqlSchema = require('./graphql/schemas');
+const graphqlResolvers = require('./graphql/resolvers');
+const mongoose = require('mongoose');
+
+// Connect DB
+(async () => {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/event_booking', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.info('DB connected');
+  } catch (error) {
+    console.error('Error connecting the DB', error);
+  }
+})();
 
 const app = express();
 
 app.use(bodyParser.json());
 
-const _store = ['Romantic Cooking', 'Sailing', 'All Night Cooking'];
-
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema: buildSchema(`
-    type RootQuery {
-      events: [String!]!
-    }
-
-    type RootMutation {
-      createEvent(name: String!): [String]
-    }
-
-    schema {
-      query: RootQuery
-      mutation: RootMutation
-    }
-  `),
-    rootValue: {
-      events: () => {
-        return _store;
-      },
-      createEvent: ({ name }) => {
-        _store.push(name);
-        return _store;
-      },
-    },
+    schema: graphqlSchema,
+    rootValue: graphqlResolvers,
     graphiql: true,
   })
 );
