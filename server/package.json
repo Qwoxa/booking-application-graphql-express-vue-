@@ -1,17 +1,18 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "mongoose": "^5.7.12"
-  }
+ "name": "event_booking",
+ "version": "1.0.0",
+ "description": "",
+ "main": "index.js",
+ "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "prettier": {
+  "trailingComma": "es5",
+  "tabWidth": 1,
+  "semi": false,
+  "singleQuote": true
+ }
 }
