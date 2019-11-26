@@ -9,13 +9,17 @@ module.exports = {
 
     return events.map(event => transformEvent(event));
   },
-  createEvent: async ({ eventInput }) => {
+  createEvent: async ({ eventInput }, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
+
     const event = await new Event({
       ...eventInput,
-      creator: '5ddd483d4e479d6f11e7a7dc', //! CHANGE ID
+      creator: req.userId,
     }).save();
 
-    const foundUser = await User.findById('5ddd483d4e479d6f11e7a7dc'); //! CHANGE ID
+    const foundUser = await User.findById(req.userId);
     foundUser.createdEvents.push(event);
     await foundUser.save();
 
