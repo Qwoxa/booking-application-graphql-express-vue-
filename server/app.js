@@ -4,6 +4,9 @@ const graphqlHTTP = require('express-graphql');
 const graphqlSchema = require('./graphql/schemas');
 const graphqlResolvers = require('./graphql/resolvers');
 const mongoose = require('mongoose');
+const { config } = require('dotenv');
+
+config();
 
 // Connect DB
 (async () => {

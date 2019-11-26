@@ -17,9 +17,14 @@ module.exports = {
     const isEqual = await bcrypt.compare(password, user[0].password);
     if (!isEqual) throw new Error('Access denied');
 
-    const token = await jwt.sign({ userId: user.id, email }, '');
+    const payload = { userId: user[0].id, email };
+    const options = { expiresIn: '1h' };
+    const token = await jwt.sign(payload, process.env.JWT, options);
+
     return {
-      token: 234,
+      userId: payload.userId,
+      tokenExpiration: 1,
+      token,
     };
   },
 };
