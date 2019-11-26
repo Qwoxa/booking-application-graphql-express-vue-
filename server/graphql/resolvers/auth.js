@@ -1,4 +1,6 @@
 const User = require('../../models/user');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   createUser: async ({ userInput }) => {
@@ -7,5 +9,17 @@ module.exports = {
 
     // bcrypt is handled by mognodb triggers
     return new User(userInput).save();
+  },
+  login: async ({ email, password }) => {
+    const user = await User.find({ email });
+    if (!user.length) throw new Error('Access denied');
+
+    const isEqual = await bcrypt.compare(password, user[0].password);
+    if (!isEqual) throw new Error('Access denied');
+
+    const token = await jwt.sign({ userId: user.id, email }, '');
+    return {
+      token: 234,
+    };
   },
 };
