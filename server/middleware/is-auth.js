@@ -13,19 +13,20 @@ module.exports = (req, res, next) => {
     return next();
   }
 
+  let decoded;
   try {
-    const decoded = jwt.verify(token, process.env.JWT);
+    decoded = jwt.verify(token, process.env.JWT);
   } catch (error) {
     req.isAuth = false;
     return next();
   }
 
-  if (!decodedToken) {
+  if (!decoded) {
     req.isAuth = false;
     return next();
   }
 
-  isAuth = true;
-  req.userId = decodedToken.userId;
+  req.isAuth = true;
+  req.userId = decoded.userId;
   next();
 };

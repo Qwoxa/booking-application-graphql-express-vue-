@@ -10,6 +10,7 @@ module.exports = {
     return events.map(event => transformEvent(event));
   },
   createEvent: async ({ eventInput }, req) => {
+    console.log(req.userId);
     if (!req.isAuth) {
       throw new Error('Unauthenticated!');
     }
