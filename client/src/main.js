@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import App from './App.vue';
+import router from './router';
 
 import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-
 import VueApollo from 'vue-apollo';
 
 Vue.use(VueApollo);
@@ -38,4 +38,5 @@ const apolloProvider = new VueApollo({
 new Vue({
   render: h => h(App),
   apolloProvider,
+  router,
 }).$mount('#app');
