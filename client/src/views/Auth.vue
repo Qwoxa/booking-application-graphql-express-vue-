@@ -15,10 +15,10 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" @click.prevent="getCurrentAction">
+      <button class="btn" type="submit" @click.prevent="getCurrentAction">
         {{ mode === 'signin' ? 'Login' : 'Submit' }}
       </button>
-      <button type="button" @click="switchMode">
+      <button class="btn" type="button" @click="switchMode">
         Switch to {{ mode === 'signin' ? 'Sign Up' : 'Sign In' }}
       </button>
     </div>
@@ -132,17 +132,4 @@ export default {
 .form-actions
   display: flex;
   justify-content: center;
-
-  button
-    cursor: pointer;
-    background-color: lighten($main, 15);
-    font: inherit;
-    border: 1px solid $main;
-    border-radius: 3px;
-    padding: .25rem 1rem;
-    margin-right: 1rem;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, .26);
-
-    &:hover
-      background: $main;
 </style>

@@ -36,4 +36,16 @@ body
   margin: 0 auto;
   padding: 0 1rem;
 
+.btn
+  cursor: pointer;
+  background-color: lighten($main, 15);
+  font: inherit;
+  border: 1px solid $main;
+  border-radius: 3px;
+  padding: .25rem 1rem;
+  margin-right: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .26);
+
+  &:hover
+    background: $main;
 </style>

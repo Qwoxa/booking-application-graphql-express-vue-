@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Events</h1>
+    <button class="btn">Create Event</button>
   </div>
 </template>
 
@@ -8,5 +8,4 @@
 export default {};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
