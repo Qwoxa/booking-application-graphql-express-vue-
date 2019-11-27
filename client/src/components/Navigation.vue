@@ -4,6 +4,7 @@
       <div class="main_navigation__logo">
         <h1>EasyEvent</h1>
       </div>
+      <div class="main_vavigation__gap"></div>
       <div class="main_navigation__items">
         <ul>
           <li v-for="[pathName, path] in links" v-bind:key="pathName">
@@ -48,6 +49,8 @@ export default {
   width: 100%;
   background-color: $main;
   color: $text;
+  display: flex;
+  justify-content: center;
 
 .main_navigation
   display: flex;
@@ -55,13 +58,15 @@ export default {
   height: 4rem;
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
   padding: 0 1rem;
 
 .main_navigation__logo
   h1
     margin: 0;
     font-size: 1.5rem;
+
+.main_vavigation__gap
+  flex-grow: 1;
 
 .main_navigation__items
   margin-left: 2rem;
@@ -74,13 +79,14 @@ export default {
 
   li
     margin: 0;
-    height: 100%;
+    height: 50%;
 
   a
     text-decoration: none;
     display: block;
     padding: 0 1rem;
-    line-height: 4rem;
+    line-height: 2rem;
+    border-radius: 5px;
     height: 100%;
     color: $text;
 
