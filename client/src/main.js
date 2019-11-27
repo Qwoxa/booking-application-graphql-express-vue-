@@ -7,7 +7,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
 
-import typeDefs from './graphql/schema';
+import { typeDefs } from './graphql/schema';
 import resolvers from './graphql/resolvers';
 
 Vue.use(VueApollo);
