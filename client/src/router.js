@@ -41,12 +41,6 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
 
-  // logout
-  if (to.path === '/logout' && !!token) {
-    localStorage.removeItem('token');
-    location.reload();
-  }
-
   // if there's a token and we want to access auth page - stay on the same page
   if (token && to.name === 'auth') return next(from);
 

@@ -10,6 +10,14 @@
           <li v-for="[pathName, path] in links" v-bind:key="pathName">
             <router-link :to="path">{{ pathName }}</router-link>
           </li>
+
+          <button
+            class="logout-btn"
+            v-if="localUser.isLoggedIn"
+            @click="logout"
+          >
+            Logout
+          </button>
         </ul>
       </div>
     </div>
@@ -32,9 +40,14 @@ export default {
       protected: [
         ['Events', '/events'],
         ['Bookings', '/bookings'],
-        ['Logout', '/logout'], // handled in router
       ],
     };
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      location.reload();
+    },
   },
   created() {
     this.links = this.localUser.isLoggedIn ? this.protected : this.noAuth;
@@ -80,6 +93,18 @@ export default {
   li
     margin: 0;
     height: 50%;
+
+  .logout-btn
+    border-radius: 5px;
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    color: inherit;
+    font: inherit;
+
+    &:hover
+      background-color: lighten($main, 15);
+
 
   a
     text-decoration: none;
