@@ -1,12 +1,148 @@
 <template>
-  <div>
-    <h1>Auth</h1>
-  </div>
+  <form class="auth-form">
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input type="email" id="email" v-model="input.email" />
+    </div>
+
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input type="password" id="password" v-model="input.password" />
+    </div>
+
+    <div class="form-error">
+      <p>{{ error }}</p>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" @click.prevent="getCurrentAction">
+        {{ mode === 'signin' ? 'Login' : 'Submit' }}
+      </button>
+      <button type="button" @click="switchMode">
+        Switch to {{ mode === 'signin' ? 'Sign Up' : 'Sign In' }}
+      </button>
+    </div>
+  </form>
 </template>
 
 <script>
-export default {};
+import { LOGIN, CREATE_USER } from '../graphql/queries';
+
+export default {
+  data() {
+    return {
+      input: {
+        email: '',
+        password: '',
+      },
+      error: null,
+      mode: 'signin',
+    };
+  },
+  methods: {
+    signup: async function() {
+      const isInvalid =
+        this.input.email.trim().length === 0 ||
+        this.input.password.trim().length === 0;
+
+      if (isInvalid) {
+        alert('Invalid email or password!');
+        return;
+      }
+
+      try {
+        await this.$apollo.mutate({
+          mutation: CREATE_USER,
+          variables: {
+            userInput: this.input,
+          },
+        });
+
+        this.input.email = '';
+        this.input.password = '';
+        this.error = null;
+      } catch (error) {
+        this.error = error.networkError.result
+          ? error.networkError.result.errors[0].message
+          : 'Network Error';
+      }
+    },
+    signin: async function() {
+      try {
+        const response = await this.$apollo.query({
+          query: LOGIN,
+          variables: {
+            ...this.input,
+          },
+        });
+
+        this.error = null;
+        localStorage.setItem('token', response.data.login.token);
+
+        // reload to refresh local state
+        location.reload();
+      } catch (error) {
+        this.error = error.networkError.result
+          ? error.networkError.result.errors[0].message
+          : 'Network Error';
+      }
+    },
+    switchMode() {
+      this.mode = this.mode === 'signup' ? 'signin' : 'signup';
+    },
+  },
+  computed: {
+    getCurrentAction() {
+      if (this.mode === 'signin') {
+        return this.signin;
+      }
+
+      return this.signup;
+    },
+  },
+};
 </script>
 
-<style scoped>
+<style lang="sass">
+@import '../sass/colors';
+
+.auth-form
+  width: 25rem;
+  max-width: 80%;
+  margin: 5rem auto;
+
+.form-control
+  margin-bottom: 1rem;
+
+  label
+    width: 100%;
+    display: block;
+    margin-bottom: .5rem;
+
+  input
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    padding: 5px 6px;
+
+.form-error
+  color: $danger;
+  text-align: center;
+
+.form-actions
+  display: flex;
+  justify-content: center;
+
+  button
+    cursor: pointer;
+    background-color: lighten($main, 15);
+    font: inherit;
+    border: 1px solid $main;
+    border-radius: 3px;
+    padding: .25rem 1rem;
+    margin-right: 1rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .26);
+
+    &:hover
+      background: $main;
 </style>

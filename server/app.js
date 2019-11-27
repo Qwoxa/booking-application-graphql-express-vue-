@@ -6,6 +6,7 @@ const graphqlResolvers = require('./graphql/resolvers');
 const mongoose = require('mongoose');
 const { config } = require('dotenv');
 const isAuth = require('./middleware/is-auth');
+const cors = require('cors');
 
 config();
 
@@ -25,7 +26,7 @@ config();
 const app = express();
 
 app.use(bodyParser.json());
-
+app.use(cors());
 app.use(isAuth);
 
 app.use(

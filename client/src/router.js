@@ -4,6 +4,7 @@ import Auth from './views/Auth';
 import NotFound from './views/NotFound';
 import Events from './views/Events';
 import Bookings from './views/Bookings';
+import jwtDecode from 'jwt-decode';
 
 Vue.use(Router);
 
@@ -12,7 +13,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: { name: 'auth' },
+      redirect: { name: 'events' },
     },
     {
       path: '/auth',
@@ -37,12 +38,36 @@ const router = new Router({
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/' || to.path === '/callback' || auth.isAuthenticated()) {
-//     return next();
-//   }
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
 
-//   auth.login({ target: to.path });
-// });
+  // logout
+  if (to.path === '/logout' && !!token) {
+    localStorage.removeItem('token');
+    location.reload();
+  }
+
+  // if there's a token and we want to access auth page - stay on the same page
+  if (token && to.name === 'auth') return next(from);
+
+  // if there's no token and we want to access auth page - navigate to the requested page
+  if (!token && to.name === 'auth') return next();
+
+  try {
+    // if token is not valid - will throw an error
+    const decodedToken = jwtDecode(token);
+    const expired = decodedToken.exp < Date.now() / 1000;
+
+    // if expired, also will throw
+    if (expired) throw new Error('expired');
+
+    // otherwise will navigate to the link
+    next();
+  } catch {
+    //! change store
+    localStorage.removeItem('token');
+    return next('auth');
+  }
+});
 
 export default router;

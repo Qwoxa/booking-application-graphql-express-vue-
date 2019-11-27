@@ -7,12 +7,15 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
 
+import typeDefs from './graphql/schema';
+import resolvers from './graphql/resolvers';
+
 Vue.use(VueApollo);
 Vue.config.productionTip = false;
 
 const getHeaders = () => {
   const headers = {};
-  const token = window.localStorage.getItem('apollo-token');
+  const token = window.localStorage.getItem('token');
 
   if (token) {
     headers.authorization = `Bearer ${token}`;
@@ -25,10 +28,23 @@ const link = new HttpLink({
   headers: getHeaders(),
 });
 
+const cache = new InMemoryCache();
+
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache,
+  typeDefs,
+  resolvers,
   appTypename: true,
+});
+
+cache.writeData({
+  data: {
+    localUser: {
+      __typename: 'LocalUser',
+      isLoggedIn: Boolean(localStorage.getItem('token')),
+    },
+  },
 });
 
 const apolloProvider = new VueApollo({
