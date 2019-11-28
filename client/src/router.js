@@ -62,7 +62,9 @@ router.beforeEach((to, from, next) => {
     localStorage.removeItem('userId');
 
     if (to.name === 'events') return next();
-    else return next('auth');
+
+    // if not events
+    location.reload();
   }
 });
 
