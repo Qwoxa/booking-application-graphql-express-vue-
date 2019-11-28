@@ -7,7 +7,9 @@ module.exports = {
     const existingUser = await User.findOne({ email: userInput.email });
     if (existingUser) throw new Error('User already exists');
 
-    // bcrypt is handled by mognodb triggers
+    const salt = await bcrypt.genSalt(10);
+    userInput.password = await bcrypt.hash(userInput.password, salt);
+
     return new User(userInput).save();
   },
   login: async ({ email, password }) => {
