@@ -48,4 +48,26 @@ body
 
   &:hover
     background: $main;
+
+.form-control
+  margin-bottom: 1rem;
+
+  label
+    width: 100%;
+    display: block;
+    margin-bottom: .5rem;
+
+  input
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+    padding: 5px 6px;
+
+.form-error
+  color: $danger;
+  text-align: center;
+
+.form-actions
+  display: flex;
+  justify-content: center;
 </style>

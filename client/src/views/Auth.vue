@@ -15,12 +15,16 @@
     </div>
 
     <div class="form-actions">
-      <button class="btn" type="submit" @click.prevent="getCurrentAction">
-        {{ mode === 'signin' ? 'Login' : 'Submit' }}
-      </button>
-      <button class="btn" type="button" @click="switchMode">
-        Switch to {{ mode === 'signin' ? 'Sign Up' : 'Sign In' }}
-      </button>
+      <button
+        class="btn"
+        type="submit"
+        @click.prevent="getCurrentAction"
+      >{{ mode === 'signin' ? 'Login' : 'Submit' }}</button>
+      <button
+        class="btn"
+        type="button"
+        @click="switchMode"
+      >Switch to {{ mode === 'signin' ? 'Sign Up' : 'Sign In' }}</button>
     </div>
   </form>
 </template>
@@ -110,26 +114,4 @@ export default {
   width: 25rem;
   max-width: 80%;
   margin: 5rem auto;
-
-.form-control
-  margin-bottom: 1rem;
-
-  label
-    width: 100%;
-    display: block;
-    margin-bottom: .5rem;
-
-  input
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid #bbb;
-    padding: 5px 6px;
-
-.form-error
-  color: $danger;
-  text-align: center;
-
-.form-actions
-  display: flex;
-  justify-content: center;
 </style>
