@@ -82,6 +82,7 @@ export default {
 
         this.error = null;
         localStorage.setItem('token', response.data.login.token);
+        localStorage.setItem('userId', response.data.login.userId);
 
         // reload to refresh local state
         location.reload();

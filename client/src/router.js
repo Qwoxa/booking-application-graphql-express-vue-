@@ -59,6 +59,7 @@ router.beforeEach((to, from, next) => {
     next();
   } catch {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
 
     if (to.name === 'events') return next();
     else return next('auth');

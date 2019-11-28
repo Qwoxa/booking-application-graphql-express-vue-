@@ -42,6 +42,7 @@ cache.writeData({
     localUser: {
       __typename: 'LocalUser',
       isLoggedIn: Boolean(localStorage.getItem('token')),
+      userId: localStorage.getItem('userId'),
     },
   },
 });
