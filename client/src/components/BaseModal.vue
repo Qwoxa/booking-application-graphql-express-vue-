@@ -41,35 +41,35 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../sass/colors';
+@import '../sass/colors'
 
 .modal
-  width: 90%;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .26);
-  position: fixed;
-  top: 20vh;
-  left: 5%;
-  color: $text;
+  width: 90%
+  background: white
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .26)
+  position: fixed
+  top: 20vh
+  left: 5%
+  color: $text
 
 .modal__header
-  padding: 1rem;
-  background-color: $main;
+  padding: 1rem
+  background-color: $main
 
   h1
-    margin: 0;
-    font-size: 1.25rem;
+    margin: 0
+    font-size: 1.25rem
 
 .modal__content
-  padding: 1rem;
+  padding: 1rem
 
 .modal__actions
-  padding-bottom: 1rem;
-  display: flex;
-  justify-content: center;
+  padding-bottom: 1rem
+  display: flex
+  justify-content: center
 
 @media (min-width: 768px)
   .modal
-    width: 30rem;
-    left: calc((100% - 30rem) / 2);
+    width: 30rem
+    left: calc((100% - 30rem) / 2)
 </style>

@@ -108,10 +108,10 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../sass/colors';
+@import '../sass/colors'
 
 .auth-form
-  width: 25rem;
-  max-width: 80%;
-  margin: 5rem auto;
+  width: 25rem
+  max-width: 80%
+  margin: 5rem auto
 </style>

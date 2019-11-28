@@ -1,7 +1,11 @@
 import gql from 'graphql-tag';
 
-export const typeDefs = gql`
+const resolvers = {};
+
+const typeDefs = gql`
   type LocalUser {
     isLoggedIn: Boolean!
   }
 `;
+
+export { resolvers, typeDefs };

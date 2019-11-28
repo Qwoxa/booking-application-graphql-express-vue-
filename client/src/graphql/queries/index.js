@@ -19,6 +19,22 @@ export const LOGIN = gql`
   }
 `;
 
+export const CREATE_EVENT = gql`
+  mutation createEvent($eventInput: EventInput!) {
+    createEvent(eventInput: $eventInput) {
+      _id
+      title
+      description
+      price
+      date
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;
+
 export const GET_LOCAL_USER = gql`
   query getLocalUser {
     localUser @client {
