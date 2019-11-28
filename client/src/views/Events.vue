@@ -24,6 +24,7 @@ export default {
     return {
       localUser: {
         isLoggedIn: false,
+        userId: null,
       },
     };
   },

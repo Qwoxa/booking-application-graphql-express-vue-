@@ -55,6 +55,7 @@ export const GET_LOCAL_USER = gql`
   query getLocalUser {
     localUser @client {
       isLoggedIn
+      userId
     }
   }
 `;

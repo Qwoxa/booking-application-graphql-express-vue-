@@ -7,18 +7,26 @@
 
     <div class="events__list-item__details">
       <button class="btn">View</button>
-      <p>Owner</p>
+      <p v-if="localUser.isLoggedIn">Owner</p>
     </div>
   </li>
 </template>
 
 <script>
+import { GET_LOCAL_USER } from '../graphql/queries';
+
 export default {
+  apollo: {
+    localUser: {
+      query: GET_LOCAL_USER,
+    },
+  },
   props: {
     title: {
       type: String,
       required: true,
     },
+
     price: {
       type: Number,
       default: null,
@@ -27,6 +35,14 @@ export default {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      localUser: {
+        loggedIn: false,
+        userId: null,
+      },
+    };
   },
 };
 </script>
