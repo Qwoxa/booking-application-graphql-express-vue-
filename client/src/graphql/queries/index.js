@@ -35,6 +35,22 @@ export const CREATE_EVENT = gql`
   }
 `;
 
+export const GET_ALL_EVENTS = gql`
+  query getAllEvents {
+    events {
+      _id
+      title
+      description
+      price
+      date
+      creator {
+        _id
+        email
+      }
+    }
+  }
+`;
+
 export const GET_LOCAL_USER = gql`
   query getLocalUser {
     localUser @client {

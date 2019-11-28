@@ -1,19 +1,18 @@
 <template>
   <div class="events__control">
     <EventsCreateEvent />
-
-    <section class="events__list">
-      <ul></ul>
-    </section>
+    <EventsList />
   </div>
 </template>
 
 <script>
 import EventsCreateEvent from '../components/EventsCreateEvent';
+import EventsList from '../components/EventsList';
 
 export default {
   components: {
     EventsCreateEvent,
+    EventsList,
   },
 };
 </script>
