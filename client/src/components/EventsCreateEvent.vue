@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="events__create">
     <p>Share you own Events!</p>
     <button class="btn" @click="showModal = true">Create Event</button>
 
@@ -76,3 +76,17 @@ export default {
   },
 };
 </script>
+
+
+<style lang="sass">
+@import '../sass/colors'
+
+
+.events__create
+  text-align: center
+  border: 1px solid $main
+  padding: 1rem
+  margin: 2rem auto
+  width: 30rem
+  max-width: 80%
+</style>

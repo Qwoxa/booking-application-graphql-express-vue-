@@ -44,8 +44,8 @@ router.beforeEach((to, from, next) => {
   // if there's a token and we want to access auth page - stay on the same page
   if (token && to.name === 'auth') return next(from);
 
-  // if there's no token and we want to access auth page - navigate to the requested page
-  if (!token && to.name === 'auth') return next();
+  // if there's no token and we want to access auth or events page - navigate to the requested page
+  if (!token && (to.name === 'auth' || to.name === 'events')) return next();
 
   try {
     // if token is not valid - will throw an error
@@ -58,9 +58,10 @@ router.beforeEach((to, from, next) => {
     // otherwise will navigate to the link
     next();
   } catch {
-    //! change store
     localStorage.removeItem('token');
-    return next('auth');
+
+    if (to.name === 'events') return next();
+    else return next('auth');
   }
 });
 
