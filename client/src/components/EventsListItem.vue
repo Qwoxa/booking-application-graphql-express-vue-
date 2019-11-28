@@ -2,11 +2,11 @@
   <li class="events__list-item">
     <div>
       <h1>{{ title }}</h1>
-      <h2 v-if="price">${{ price }}</h2>
+      <h2 v-if="price">${{ price }} - {{ localDate }}</h2>
     </div>
 
-    <div class="events__list-item__details">
-      <button class="btn">View</button>
+    <div v-if="displayDetails" class="events__list-item__details">
+      <button class="btn" @click="onShowDetails(_id)">View</button>
       <p v-if="isCreator">Owner</p>
     </div>
   </li>
@@ -14,22 +14,21 @@
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      default: null,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    isCreator: {
-      type: Boolean,
-      default: false,
+  props: [
+    'title',
+    'price',
+    'description',
+    'isCreator',
+    'displayDetails',
+    '_id',
+    'date',
+    'creator',
+    '__typename',
+    'onShowDetails',
+  ],
+  computed: {
+    localDate() {
+      return new Date(this.date).toLocaleDateString();
     },
   },
 };

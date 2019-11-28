@@ -8,6 +8,7 @@
 <script>
 import EventsCreateEvent from '../components/EventsCreateEvent';
 import EventsList from '../components/EventsList';
+
 import { GET_LOCAL_USER } from '../graphql/queries';
 
 export default {

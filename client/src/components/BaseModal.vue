@@ -8,7 +8,9 @@
     </section>
     <section class="modal__actions">
       <button class="btn" v-if="cancelable" @click="onCancel">Cancel</button>
-      <button class="btn" v-if="confirmable" @click="onConfirm">Confirm</button>
+      <button class="btn" v-if="confirmable" @click="onConfirm">
+        {{ confirmTitle }}
+      </button>
     </section>
   </div>
 </template>
@@ -19,6 +21,10 @@ export default {
     title: {
       type: String,
       required: true,
+    },
+    confirmTitle: {
+      type: String,
+      default: 'Submit',
     },
     cancelable: {
       type: Boolean,
