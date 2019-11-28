@@ -5,9 +5,13 @@
 
     <div v-show="showModal">
       <Backdrop />
-      <Modal title="Create New Event" :onCancel="onModalCancel" :onConfirm="onModalConfirm">
+      <Modal
+        title="Create New Event"
+        :onCancel="onModalCancel"
+        :onConfirm="onModalConfirm"
+      >
         <template #content>
-          <EventsForm :input="input" :error="error" />
+          <EventsCreateForm :input="input" :error="error" />
         </template>
       </Modal>
     </div>
@@ -17,14 +21,14 @@
 <script>
 import Modal from './BaseModal';
 import Backdrop from './BaseBackdrop';
-import EventsForm from './EventsForm';
+import EventsCreateForm from './EventsCreateForm';
 import { CREATE_EVENT, GET_ALL_EVENTS } from '../graphql/queries';
 
 export default {
   components: {
     Backdrop,
     Modal,
-    EventsForm,
+    EventsCreateForm,
   },
   data() {
     return {
@@ -76,7 +80,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="sass">
 @import '../sass/colors'
