@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
     if (to.name === 'events') return next();
 
     // if not events
-    location.reload();
+    return next('auth');
   }
 });
 
