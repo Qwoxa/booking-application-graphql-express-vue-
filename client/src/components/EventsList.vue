@@ -1,27 +1,43 @@
 <template>
   <section>
     <ul class="events__list">
-      <EventListItem v-for="event in events" :key="event._id" v-bind="event" />
-      <EventListItem v-if="events.length === 0" title="No items" description="There's no items" />
+      <EventListItem
+        v-for="event in events"
+        :key="event._id"
+        :isCreator="localUser.userId === event.creator._id"
+        v-bind="event"
+      />
+      <EventListItem
+        v-if="events.length === 0"
+        title="No items"
+        description="There's no items"
+      />
     </ul>
   </section>
 </template>
 
 <script>
-import { GET_ALL_EVENTS } from '../graphql/queries';
+import { GET_ALL_EVENTS, GET_LOCAL_USER } from '../graphql/queries';
 import EventListItem from './EventsListItem';
 
 export default {
-  components: {
-    EventListItem,
-  },
   apollo: {
+    localUser: {
+      query: GET_LOCAL_USER,
+    },
     events: {
       query: GET_ALL_EVENTS,
     },
   },
+  components: {
+    EventListItem,
+  },
   data() {
     return {
+      localUser: {
+        loggedIn: false,
+        userId: null,
+      },
       events: [],
     };
   },
