@@ -25,9 +25,9 @@
     </ul>
 
     <EventListViewItem
-      :showDetails="showDetails"
-      :showModal="showModal"
+      :isOpen="isOpen"
       :hideModal="hideModal"
+      :bookEvent="bookEvent"
       v-bind="details"
     />
   </section>
@@ -58,17 +58,20 @@ export default {
         userId: null,
       },
       details: null,
-      showModal: false,
+      isOpen: false,
       events: [],
     };
   },
   methods: {
     showDetails(id) {
       this.details = this.events.find(e => e._id === id);
-      this.showModal = true;
+      this.isOpen = true;
     },
     hideModal() {
-      this.showModal = false;
+      this.isOpen = false;
+    },
+    bookEvent() {
+      //arg - id
     },
   },
 };

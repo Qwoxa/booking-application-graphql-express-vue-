@@ -1,10 +1,11 @@
 <template>
   <Modal
+    v-if="isOpen"
     class="view-event__modal"
-    v-if="showModal"
     title="View Event"
-    :onCancel="hideModal"
     confirmTitle="Book Event"
+    :onCancel="hideModal"
+    :onConfirm="bookEvent"
   >
     <template #content>
       <h1>{{ title }}</h1>
@@ -21,7 +22,15 @@
 import Modal from './BaseModal';
 
 export default {
-  props: ['date', 'title', 'price', 'description', 'showModal', 'hideModal'],
+  props: [
+    'date',
+    'title',
+    'price',
+    'description',
+    'isOpen',
+    'hideModal',
+    'bookEvent',
+  ],
   components: {
     Modal,
   },
