@@ -1,8 +1,8 @@
 <template>
-  <div class="events__list-item">
+  <li class="events__list-item">
     <h3>{{ title }}</h3>
     <p>{{ description }}</p>
-  </div>
+  </li>
 </template>
 
 <script>

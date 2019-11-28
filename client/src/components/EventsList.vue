@@ -1,13 +1,8 @@
 <template>
   <section>
     <ul class="events__list">
-      <li v-for="event in events" :key="event._id">
-        <EventListItem v-bind="event" />
-      </li>
-
-      <div v-if="events.length === 0">
-        <EventListItem title="No items" description="There's no items" />
-      </div>
+      <EventListItem v-for="event in events" :key="event._id" v-bind="event" />
+      <EventListItem v-if="events.length === 0" title="No items" description="There's no items" />
     </ul>
   </section>
 </template>
