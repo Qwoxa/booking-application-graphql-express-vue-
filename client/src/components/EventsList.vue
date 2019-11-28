@@ -28,6 +28,7 @@
       :isOpen="isOpen"
       :hideModal="hideModal"
       :bookEvent="bookEvent"
+      :isLoggedIn="localUser.isLoggedIn"
       v-bind="details"
     />
   </section>
@@ -54,7 +55,7 @@ export default {
   data() {
     return {
       localUser: {
-        loggedIn: false,
+        isLoggedIn: false,
         userId: null,
       },
       details: null,
@@ -71,6 +72,7 @@ export default {
       this.isOpen = false;
     },
     bookEvent() {
+      console.log(this.localUser);
       //arg - id
     },
   },

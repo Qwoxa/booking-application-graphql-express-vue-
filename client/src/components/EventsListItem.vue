@@ -6,8 +6,10 @@
     </div>
 
     <div v-if="displayDetails" class="events__list-item__details">
-      <button class="btn" @click="onShowDetails(_id)">View</button>
-      <p v-if="isCreator">Owner</p>
+      <button v-if="!isCreator" class="btn" @click="onShowDetails(_id)">
+        View
+      </button>
+      <p v-else>Mine</p>
     </div>
   </li>
 </template>
@@ -62,5 +64,12 @@ export default {
   align-items: center
 
   p
-    margin: 0.5rem 0
+    color: #000;
+    cursor: default
+    background-color: lighten($main, 35)
+    border: 1px solid $main
+    border-radius: 3px
+    padding: .25rem 1rem
+    margin: 0 1rem
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .26)
 </style>

@@ -11,7 +11,13 @@
             <router-link :to="path">{{ pathName }}</router-link>
           </li>
 
-          <button class="logout-btn" v-if="localUser.isLoggedIn" @click="logout">Logout</button>
+          <button
+            class="logout-btn"
+            v-if="localUser.isLoggedIn"
+            @click="logout"
+          >
+            Logout
+          </button>
         </ul>
       </div>
     </div>
@@ -30,8 +36,14 @@ export default {
   data() {
     return {
       links: [],
-      noAuth: [['Events', '/events'], ['Authenticate', '/auth']],
-      protected: [['Events', '/events'], ['Bookings', '/bookings']],
+      noAuth: [
+        ['Events', '/events'],
+        ['Authenticate', '/auth'],
+      ],
+      protected: [
+        ['Events', '/events'],
+        ['Bookings', '/bookings'],
+      ],
       localUser: {
         isLoggedIn: false,
         userId: null,
@@ -41,6 +53,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem('token');
+      localStorage.removeItem('userId');
       location.reload();
     },
   },

@@ -5,6 +5,7 @@
     title="View Event"
     confirmTitle="Book Event"
     :onCancel="hideModal"
+    :confirmable="isLoggedIn"
     :onConfirm="bookEvent"
   >
     <template #content>
@@ -30,6 +31,7 @@ export default {
     'isOpen',
     'hideModal',
     'bookEvent',
+    'isLoggedIn',
   ],
   components: {
     Modal,
