@@ -18,7 +18,7 @@
 import Modal from './BaseModal';
 import Backdrop from './BaseBackdrop';
 import EventsForm from './EventsForm';
-import { CREATE_EVENT } from '../graphql/queries';
+import { CREATE_EVENT, GET_ALL_EVENTS } from '../graphql/queries';
 
 export default {
   components: {
@@ -60,7 +60,11 @@ export default {
           variables: {
             eventInput: Object.fromEntries(data),
           },
-          // TODO update cache
+          update: (cache, { data: { createEvent } }) => {
+            const data = cache.readQuery({ query: GET_ALL_EVENTS });
+            data.events = [createEvent, ...data.events];
+            cache.writeQuery({ query: GET_ALL_EVENTS, data });
+          },
         });
 
         Object.entries(this.input).forEach(([key]) => (this.input[key] = null));
