@@ -1,17 +1,35 @@
 <template>
   <div class="events-control">
     <p>Share you own Events!</p>
-    <button class="btn">Create Event</button>
-    <Modal title="cool" />
+    <button class="btn" @click="showModal = true">Create Event</button>
+
+    <div v-show="showModal">
+      <Backdrop />
+      <Modal title="cool" :onCancel="onModalCancel">
+        <template #content>Modal content</template>
+      </Modal>
+    </div>
   </div>
 </template>
 
 <script>
 import Modal from '../components/Modal';
+import Backdrop from '../components/Backdrop';
 
 export default {
   components: {
+    Backdrop,
     Modal,
+  },
+  data() {
+    return {
+      showModal: false,
+    };
+  },
+  methods: {
+    onModalCancel() {
+      this.showModal = false;
+    },
   },
 };
 </script>
