@@ -33,6 +33,6 @@ module.exports = {
     const booking = await Booking.findById(bookingId).populate('event');
 
     await Booking.deleteOne({ _id: bookingId });
-    return transformEvent(booking.event);
+    return booking;
   },
 };
