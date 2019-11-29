@@ -6,9 +6,7 @@
     </div>
 
     <div v-if="displayDetails" class="events__list-item__details">
-      <button v-if="!isCreator" class="btn" @click="onShowDetails(_id)">
-        View
-      </button>
+      <button v-if="!isCreator" class="btn" @click="onShowDetails(_id)">View</button>
       <p v-else>Mine</p>
     </div>
   </li>
@@ -38,24 +36,11 @@ export default {
 
 <style lang="sass">
 @import '../sass/colors';
+@import '../sass/mixins';
 
 .events__list-item
-  display: flex
-  justify-content: space-between
-  align-items: center
-  flex-flow: row wrap
-  margin: 1rem 0
-  padding: 1rem
-  border: 1px solid $main
+  @include base-list-item
 
-  h1
-    margin: 0
-    font-size: 1.5rem
-
-  h2
-    margin: 0
-    font-size: 1rem
-    color: #777
 
 .events__list-item__details
   display: flex

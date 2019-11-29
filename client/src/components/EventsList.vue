@@ -31,7 +31,12 @@
 </template>
 
 <script>
-import { GET_ALL_EVENTS, GET_LOCAL_USER, BOOK_EVENT } from '../graphql/queries';
+import {
+  GET_ALL_EVENTS,
+  GET_ALL_BOOKINGS,
+  GET_LOCAL_USER,
+  BOOK_EVENT,
+} from '../graphql/queries';
 import EventListItem from './EventsListItem';
 import EventListViewItem from './EventsListViewItem';
 
@@ -57,6 +62,7 @@ export default {
       details: null,
       isOpen: false,
       events: [],
+      bookings: [],
     };
   },
   methods: {
@@ -73,7 +79,13 @@ export default {
         variables: {
           eventId,
         },
+        update: (cache, { data: { bookEvent } }) => {
+          const data = cache.readQuery({ query: GET_ALL_BOOKINGS });
+          data.bookings = [...data.bookings, bookEvent];
+          cache.writeQuery({ query: GET_ALL_BOOKINGS, data });
+        },
       });
+      this.isOpen = false;
     },
   },
 };
@@ -81,13 +93,10 @@ export default {
 
 <style lang="sass">
 @import '../sass/colors';
+@import '../sass/mixins';
 
 .events__list
-  width: 40rem
-  max-width: 90%
-  margin: 2rem auto
-  list-style: none
-  padding: 0
+  @include base-list
 
 .view-event__modal
   h1

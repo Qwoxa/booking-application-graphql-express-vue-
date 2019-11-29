@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1>Bookings</h1>
+    <BookingsList />
   </div>
 </template>
 
 <script>
-export default {};
+import BookingsList from '../components/BookingsList';
+
+export default {
+  components: {
+    BookingsList,
+  },
+};
 </script>
 
 <style scoped>

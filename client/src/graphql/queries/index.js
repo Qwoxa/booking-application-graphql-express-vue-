@@ -61,6 +61,26 @@ export const BOOK_EVENT = gql`
   }
 `;
 
+export const GET_ALL_BOOKINGS = gql`
+  query getAllBookings {
+    bookings {
+      _id
+      createdAt
+      event {
+        title
+        date
+      }
+    }
+  }
+`;
+export const CANCEL_BOOKING = gql`
+  mutation cancelBooking($bookingId: ID!) {
+    cancelBooking(bookingId: $bookingId) {
+      _id
+    }
+  }
+`;
+
 export const GET_LOCAL_USER = gql`
   query getLocalUser {
     localUser @client {
