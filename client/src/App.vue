@@ -21,6 +21,7 @@ export default {
 
 <style lang="sass">
 @import './sass/colors'
+@import './sass/mixins';
 
 body
   margin: 0
@@ -59,19 +60,11 @@ body
     text-align: left
 
   input
-    width: 100%
-    border-radius: 3px
-    border: 1px solid #bbb
-    padding: 5px 6px
-    box-sizing: border-box
+    @include base-input
 
 
   textarea
-    width: 100%
-    border-radius: 3px
-    border: 1px solid #bbb
-    padding: 5px 6px
-    box-sizing: border-box
+    @include base-input
     resize: none
 
 .form-error
