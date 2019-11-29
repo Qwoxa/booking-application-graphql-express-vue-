@@ -8,6 +8,7 @@
         :key="booking._id"
         :_id="booking._id"
         :title="booking.event.title"
+        :whoBooked="booking.user.email"
         :date="booking.event.date"
         :createdAt="booking.createdAt"
         :cancelBooking="cancelBooking"

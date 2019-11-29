@@ -7,6 +7,7 @@
 
     <div>
       <button v-if="isMine" class="btn" @click="cancelBooking(_id)">Cancel</button>
+      <!-- <p v-else>{{ whoBooked }}</p> TODO -->
     </div>
   </li>
 </template>
@@ -21,6 +22,7 @@ export default {
     date: String,
     isMine: Boolean,
     cancelBooking: Function,
+    whoBooked: String,
   },
 
   computed: {

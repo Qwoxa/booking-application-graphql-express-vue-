@@ -68,6 +68,7 @@ export const GET_ALL_BOOKINGS = gql`
       createdAt
       user {
         _id
+        email
       }
       event {
         title
