@@ -29,16 +29,7 @@ import BookingsListItem from './BookingsListItem';
 import { GET_ALL_BOOKINGS, CANCEL_BOOKING } from '../graphql/queries';
 
 export default {
-  apollo: {
-    bookings: {
-      query: GET_ALL_BOOKINGS,
-    },
-  },
-  data() {
-    return {
-      bookings: [],
-    };
-  },
+  props: ['bookings'],
   methods: {
     cancelBooking(id) {
       this.$apollo.mutate({

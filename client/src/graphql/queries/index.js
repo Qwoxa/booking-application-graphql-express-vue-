@@ -81,6 +81,7 @@ export const GET_ALL_BOOKINGS = gql`
       event {
         title
         date
+        price
       }
     }
   }

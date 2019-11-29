@@ -5,23 +5,30 @@
       <div :class="{ active: !isListTab }" @click="isListTab = false">Chart</div>
     </div>
 
-    <BookingsList v-if="isListTab" />
-    <BookingsChart v-else />
+    <BookingsList v-if="isListTab" :bookings="bookings" />
+    <BookingsChart v-else :bookings="bookings" />
   </div>
 </template>
 
 <script>
 import BookingsList from '../components/BookingsList';
 import BookingsChart from '../components/BookingsChart';
+import { GET_ALL_BOOKINGS } from '../graphql/queries';
 
 export default {
   components: {
     BookingsList,
     BookingsChart,
   },
+  apollo: {
+    bookings: {
+      query: GET_ALL_BOOKINGS,
+    },
+  },
   data() {
     return {
       isListTab: true,
+      bookings: [],
     };
   },
 };
