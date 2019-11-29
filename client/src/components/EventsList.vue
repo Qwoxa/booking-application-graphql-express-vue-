@@ -17,11 +17,7 @@
         :displayDetails="false"
       />
       <!-- Loading -->
-      <EventListItem
-        v-if="$apollo.loading"
-        title="Loading.."
-        :displayDetails="false"
-      />
+      <EventListItem v-if="$apollo.loading" title="Loading.." :displayDetails="false" />
     </ul>
 
     <EventListViewItem
@@ -35,7 +31,7 @@
 </template>
 
 <script>
-import { GET_ALL_EVENTS, GET_LOCAL_USER } from '../graphql/queries';
+import { GET_ALL_EVENTS, GET_LOCAL_USER, BOOK_EVENT } from '../graphql/queries';
 import EventListItem from './EventsListItem';
 import EventListViewItem from './EventsListViewItem';
 
@@ -71,9 +67,13 @@ export default {
     hideModal() {
       this.isOpen = false;
     },
-    bookEvent() {
-      console.log(this.localUser);
-      //arg - id
+    bookEvent(eventId) {
+      this.$apollo.mutate({
+        mutation: BOOK_EVENT,
+        variables: {
+          eventId,
+        },
+      });
     },
   },
 };

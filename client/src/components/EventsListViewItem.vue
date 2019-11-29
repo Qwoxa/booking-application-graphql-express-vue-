@@ -6,7 +6,7 @@
     confirmTitle="Book Event"
     :onCancel="hideModal"
     :confirmable="isLoggedIn"
-    :onConfirm="bookEvent"
+    :onConfirm="bookEvent.bind(this, _id)"
   >
     <template #content>
       <h1>{{ title }}</h1>
@@ -24,6 +24,9 @@ import Modal from './BaseModal';
 
 export default {
   props: [
+    '_id',
+    'creator',
+    '__typename',
     'date',
     'title',
     'price',

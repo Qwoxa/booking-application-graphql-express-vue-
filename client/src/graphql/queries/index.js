@@ -51,6 +51,16 @@ export const GET_ALL_EVENTS = gql`
   }
 `;
 
+export const BOOK_EVENT = gql`
+  mutation bookEvent($eventId: ID!) {
+    bookEvent(eventId: $eventId) {
+      _id
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const GET_LOCAL_USER = gql`
   query getLocalUser {
     localUser @client {
