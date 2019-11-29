@@ -20,11 +20,11 @@ const { toISOString } = require('../../helpers');
  */
 const events = async eventIds => {
   const events = await Event.find({ _id: { $in: eventIds } });
-  events.sort((a, b) => {
+  const sortedEvents = events.sort((a, b) => {
     return eventIds.indexOf(a._id.toString) - eventIds.indexOf(b._id.toString);
   });
 
-  return events.map(event => ({
+  return sortedEvents.map(event => ({
     ...event._doc,
     creator: user.bind(this, event._doc.creator),
   }));
