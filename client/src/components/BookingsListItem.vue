@@ -5,7 +5,7 @@
       <h2 v-if="displayDetails">{{ createdAtFormatted }}</h2>
     </div>
 
-    <div>
+    <div v-if="displayDetails">
       <button class="btn" @click="cancelBooking(_id)">Cancel</button>
     </div>
   </li>
