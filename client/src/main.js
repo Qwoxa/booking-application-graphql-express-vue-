@@ -29,7 +29,7 @@ const link = new HttpLink({
 
 const cache = new InMemoryCache();
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   link,
   cache,
   typeDefs,

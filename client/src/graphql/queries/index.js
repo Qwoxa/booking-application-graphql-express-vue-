@@ -59,3 +59,19 @@ export const GET_LOCAL_USER = gql`
     }
   }
 `;
+
+export const LOCAL_LOGIN = gql`
+  mutation localLogin($userId: ID!) {
+    localLogin(userId: $userId) @client {
+      isLoggedIn
+    }
+  }
+`;
+
+export const LOCAL_LOGOUT = gql`
+  mutation localLogout {
+    localLogout @client {
+      isLoggedIn
+    }
+  }
+`;

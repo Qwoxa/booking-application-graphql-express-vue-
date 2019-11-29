@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { LOGIN, CREATE_USER } from '../graphql/queries';
+import { LOGIN, CREATE_USER, LOCAL_LOGIN } from '../graphql/queries';
 
 export default {
   data() {
@@ -84,8 +84,12 @@ export default {
         localStorage.setItem('token', response.data.login.token);
         localStorage.setItem('userId', response.data.login.userId);
 
-        // reload to refresh local state
-        location.reload();
+        this.$apollo.mutate({
+          mutation: LOCAL_LOGIN,
+          variables: { userId: response.data.login.userId },
+        });
+
+        this.$router.push('events');
       } catch (error) {
         this.error = error.networkError.result
           ? error.networkError.result.errors[0].message

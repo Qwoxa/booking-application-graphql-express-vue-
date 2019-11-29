@@ -6,6 +6,9 @@ import Events from './views/Events';
 import Bookings from './views/Bookings';
 import jwtDecode from 'jwt-decode';
 
+import { client as apolloClient } from './main';
+import { LOCAL_LOGOUT } from './graphql/queries';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -60,6 +63,10 @@ router.beforeEach((to, from, next) => {
   } catch {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+
+    apolloClient.mutate({
+      mutation: LOCAL_LOGOUT,
+    });
 
     if (to.name === 'events') return next();
 

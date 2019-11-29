@@ -11,13 +11,7 @@
             <router-link :to="path">{{ pathName }}</router-link>
           </li>
 
-          <button
-            class="logout-btn"
-            v-if="localUser.isLoggedIn"
-            @click="logout"
-          >
-            Logout
-          </button>
+          <button class="logout-btn" v-if="localUser.isLoggedIn" @click="logout">Logout</button>
         </ul>
       </div>
     </div>
@@ -25,7 +19,7 @@
 </template>
 
 <script>
-import { GET_LOCAL_USER } from '../graphql/queries';
+import { GET_LOCAL_USER, LOCAL_LOGOUT } from '../graphql/queries';
 
 export default {
   apollo: {
@@ -36,14 +30,8 @@ export default {
   data() {
     return {
       links: [],
-      noAuth: [
-        ['Events', '/events'],
-        ['Authenticate', '/auth'],
-      ],
-      protected: [
-        ['Events', '/events'],
-        ['Bookings', '/bookings'],
-      ],
+      noAuth: [['Events', '/events'], ['Authenticate', '/auth']],
+      protected: [['Events', '/events'], ['Bookings', '/bookings']],
       localUser: {
         isLoggedIn: false,
         userId: null,
@@ -54,10 +42,15 @@ export default {
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
-      location.reload();
+      this.$apollo.mutate({
+        mutation: LOCAL_LOGOUT,
+      });
     },
   },
   created() {
+    this.links = this.localUser.isLoggedIn ? this.protected : this.noAuth;
+  },
+  beforeUpdate() {
     this.links = this.localUser.isLoggedIn ? this.protected : this.noAuth;
   },
 };
