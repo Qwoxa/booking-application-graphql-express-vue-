@@ -57,6 +57,14 @@ export const BOOK_EVENT = gql`
       _id
       createdAt
       updatedAt
+      user {
+        _id
+        email
+      }
+      event {
+        title
+        date
+      }
     }
   }
 `;

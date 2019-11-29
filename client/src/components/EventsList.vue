@@ -62,7 +62,6 @@ export default {
       details: null,
       isOpen: false,
       events: [],
-      bookings: [],
     };
   },
   methods: {
