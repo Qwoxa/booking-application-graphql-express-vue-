@@ -1,6 +1,15 @@
+const DataLoader = require('dataloader');
 const User = require('../../models/user');
 const Event = require('../../models/event');
 const Booking = require('../../models/booking');
+
+const eventLoader = new DataLoader(eventIds => {
+  return events(eventIds);
+});
+
+const userLoader = new DataLoader(userIds => {
+  return User.find({ _id: { $in: userIds } }).select('-password');
+});
 
 const { toISOString } = require('../../helpers');
 
@@ -24,10 +33,11 @@ const events = async eventIds => {
  * @returns {User}
  */
 const user = async userId => {
-  const user = await User.findById(userId).select('-password');
+  const user = await userLoader.load(userId.toString());
+  //User.findById(userId);
   return {
     ...user._doc,
-    createdEvents: events.bind(this, user._doc.createdEvents),
+    createdEvents: () => eventLoader.loadMany(user._doc.createdEvents),
   };
 };
 
@@ -36,12 +46,9 @@ const user = async userId => {
  * @param {String} eventId
  */
 const singleEvent = async eventId => {
-  const event = await Event.findById(eventId);
+  const event = await eventLoader.load(eventId.toString());
 
-  return {
-    ...event._doc,
-    creator: user.bind(this, event._doc.creator),
-  };
+  return event;
 };
 
 /**
