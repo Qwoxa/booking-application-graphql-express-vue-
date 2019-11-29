@@ -68,6 +68,8 @@ router.beforeEach((to, from, next) => {
       mutation: LOCAL_LOGOUT,
     });
 
+    // location.reload();
+
     if (to.name === 'events') return next();
 
     // if not events

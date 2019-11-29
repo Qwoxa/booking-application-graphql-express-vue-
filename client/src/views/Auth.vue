@@ -89,7 +89,7 @@ export default {
           variables: { userId: response.data.login.userId },
         });
 
-        this.$router.push('events');
+        location.reload();
       } catch (error) {
         this.error = error.networkError.result
           ? error.networkError.result.errors[0].message

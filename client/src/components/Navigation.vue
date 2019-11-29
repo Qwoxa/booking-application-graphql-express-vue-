@@ -45,6 +45,8 @@ export default {
       this.$apollo.mutate({
         mutation: LOCAL_LOGOUT,
       });
+
+      location.reload();
     },
   },
   created() {

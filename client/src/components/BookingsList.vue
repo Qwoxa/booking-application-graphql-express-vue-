@@ -8,11 +8,9 @@
         :key="booking._id"
         :_id="booking._id"
         :title="booking.event.title"
-        :whoBooked="booking.user.email"
         :date="booking.event.date"
         :createdAt="booking.createdAt"
         :cancelBooking="cancelBooking"
-        :isMine="booking.user._id === localUser.userId"
       />
       <!-- No entries -->
       <BookingsListItem
@@ -28,19 +26,12 @@
 
 <script>
 import BookingsListItem from './BookingsListItem';
-import {
-  GET_ALL_BOOKINGS,
-  CANCEL_BOOKING,
-  GET_LOCAL_USER,
-} from '../graphql/queries';
+import { GET_ALL_BOOKINGS, CANCEL_BOOKING } from '../graphql/queries';
 
 export default {
   apollo: {
     bookings: {
       query: GET_ALL_BOOKINGS,
-    },
-    localUser: {
-      query: GET_LOCAL_USER,
     },
   },
   data() {
